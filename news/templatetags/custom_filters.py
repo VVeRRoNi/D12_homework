@@ -1,14 +1,12 @@
 from django import template
 
 register = template.Library()
-censorwords = ["сука", "блять", "пиздец", "хуй", "ебать"]
 
-@register.filter(name='censor')
+censor_list = ["слово1", "слово2", "слово3", "слово4"]
+
+
+@register.filter(name="censor")
 def censor(value):
-    for a in censorwords:
-        b = str(a + ",")
-        с = str(b.title())
-        value = value.replace(a, "&#129324;")
-        value = value.replace(b, "&#129324;")
-        value = value.replace(с, "&#129324;")
+    if value in censor_list:
+        return "***"
     return value

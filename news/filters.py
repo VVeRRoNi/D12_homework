@@ -1,13 +1,12 @@
-from django_filters import FilterSet  # импортируем filterset, чем-то напоминающий знакомые дженерики
+from django_filters import FilterSet
 from .models import Post
-from django_filters import DateFilter
-from django import forms
 
-class PostFilter(FilterSet):
+
+class NewsFilter(FilterSet):
     class Meta:
         model = Post
         fields = {
-            'title': ['icontains'],
-            'author': ['exact'],
-            'dateCreation': ['gt'],
+            "dateCreation": ["gt"],
+            "author": ["gt"],
+            "title": ["icontains"],
         }

@@ -1,17 +1,27 @@
 from django.urls import path
-from .views import NewsList, NewsItem, Search, CreatePost, EditPost, DeletePost, add_subscribe, del_subscribe
 
-app_name = 'news'
+from .views import (
+    PostList,
+    PostDetail,
+    PostCreateView,
+    PostDeleteView,
+    PostUpdateView,
+    PostSearch,
+    i_am_author,
+    CategoryDetailView,
+    subscribe,
+    unsubscribe,
+)
+
 urlpatterns = [
-  path('', NewsList.as_view()),
-  path('<int:pk>', NewsItem.as_view()),
-  path('search', Search.as_view()),
-  path('add', CreatePost.as_view()),
-  path('<int:pk>/edit', EditPost.as_view()),
-  path('<int:pk>/delete', DeletePost.as_view()),
-  path('login/', LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
-    path('signup/', BaseRegisterView.as_view(template_name='signup.html'), name='signup'),
-    path('upgrade/', upgrade_me, name='upgrade'),
-    path('category/', Subscribers),
+    path("", PostList.as_view(), name="list"),
+    path("search/", PostSearch.as_view(), name="search"),
+    path("<int:pk>", PostDetail.as_view(), name="post"),
+    path("create", PostCreateView.as_view(), name="create"),
+    path("<int:pk>/edit", PostUpdateView.as_view(), name="edit"),
+    path("<int:pk>/delete", PostDeleteView.as_view(), name="delete"),
+    path("be_author/", i_am_author, name="be_author"),
+    path("category/<int:pk>", CategoryDetailView.as_view(), name="category"),
+    path("category/<int:pk>/subscribe", subscribe, name="subscribe"),
+    path("category/<int:pk>/unsubscribe", unsubscribe, name="unsubscribe"),
 ]
